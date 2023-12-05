@@ -6,7 +6,7 @@ function readFromFile(fileName) {
   return data.split('\n');
 }
 
-a = readFromFile('ex1.txt').filter(x => x).map(function(x) {
+a = readFromFile('ex2.txt').filter(x => x).map(function(x) {
   spl = x.split(':')[1].trim().split('|')
   return { winners: spl[0].split(' ').filter(x => x).map(x => parseInt(x)), numbers: spl[1].split(' ').filter(x => x).map(x => parseInt(x)) }
 });
@@ -17,18 +17,18 @@ winningNumbers = a.map(x => x.numbers.map(y => x.winners.includes(y) ? 1 : 0).re
 
 points = winningNumbers.map(x => x > 0 ? Math.pow(2, x - 1) : 0).reduce((a, b) => a + b);
 
-a = new Array(winningNumbers.length).fill(0)
+scratch = new Array(winningNumbers.length).fill(1)
 
-a[0] = 1
+scratch[0] = 1
 
-//for (let i = 1; i < a.length; i++) {
-//  for (let j = i + 1; i <= i + winningNumbers[i]; j++) {
-//    a[j] += 1
-//  }
-//}
+for (let i = 0; i < winningNumbers.length; i++) {
+  console.log(`Itter ${i}: ${scratch}`);
+  for (let j = 0; j < winningNumbers[i]; j++) {
+    console.log(`Adding ${scratch[i]} to index ${i + j + 1}`);
+    scratch[i + j + 1] += scratch[i];
 
-
-winningNumbers.forEach(function(x, i) { for (let j = i + 1; j <= i + x; j++) { a[j] += 1 } })
+  }
+}
 console.log(winningNumbers);
-console.log(a);
+console.log(scratch.reduce((a, b) => a + b))
 

@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 
 
-function readInput(file_name) {
+export function readInput(file_name) {
   const input = fs.readFileSync(file_name, 'utf8');
   return input.split('\n');
 }

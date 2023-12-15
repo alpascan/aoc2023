@@ -53,22 +53,27 @@ function calculateHandPower(card) {
     console.log(card);
 
     jokerTimes = cardDict['01'];
-    cardDict['01'] = 0;
-    maxKey = Object.keys(cardDict).reduce((a, b) => cardDict[a] > cardDict[b] ? a : b);
-    cardDict['01'] += cardDict[maxKey] + jokerTimes
-    delete cardDict[maxKey];
-    console.log(maxKey);
-    cardMaxKey = reverseCalulateCardPower(maxKey);
-    console.log(cardMaxKey);
+    delete cardDict['01'];
+    if (Object.keys(cardDict).length > 0) {
+      maxKey = Object.keys(cardDict).reduce((a, b) => cardDict[a] > cardDict[b] ? a : b);
+      console.log('MaxKey is ' + maxKey + 'and its value is ' + cardDict[maxKey])
+      cardDict['01'] = cardDict[maxKey] + jokerTimes
+      delete cardDict[maxKey];
 
-    // card = card.replace(new RegExp(reverseCalulateCardPower(maxKey), 'g'), 'J');
-    console.log('New CardDict');
-    console.log(cardDict);
-    console.log(card);
+      // card = card.replace(new RegExp(reverseCalulateCardPower(maxKey), 'g'), 'J');
+      console.log('New CardDict');
+      console.log(cardDict)
+    }
+    else {
+      cardDict['01'] = jokerTimes;
+    }
 
   }
+
+  console.log(cardDict);
   let handPower = 0;
   for (i in cardDict) {
+    console.log("This is cardDict[i]" + cardDict[i])
     switch (cardDict[i]) {
       case 2:
         handPower += 1;
@@ -114,6 +119,7 @@ d = c.reduce((a, b) => a + b);
 
 console.log(cards);
 
-console.log(cards.map(x => x.cardPower[0] != 'z' ? x : null).filter(x => x))
 console.log(input.length);
-console.log(c.reduce((a, b) => a + b))
+console.log(c)
+console.log(c.reduce((a, b) => a + b));
+console.log(calculateHandPower('JJJKK'));

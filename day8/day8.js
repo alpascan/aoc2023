@@ -8,7 +8,7 @@ function readInput(file_name) {
   return input.split('\n');
 }
 
-input = readInput("ex2.txt");
+input = readInput("ex3.txt");
 road = input[0]
 
 input.splice(0, 2).filter(x => x)
@@ -38,5 +38,6 @@ while (currentNode != 'ZZZ') {
     steps += 1
   }
 }
-
+console.log(a)
+console.log(Object.keys(a).filter(x => x.split('')[x.split('').length] == 'A' ? x : null).filter(x => x))
 console.log(steps)
